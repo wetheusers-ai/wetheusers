@@ -1,0 +1,67 @@
+{
+  "_about": "Single source of truth for document version + last-substantive-change date. Edit a line here, then re-render: each PDF's printed stamp is generated from this file, so it cannot drift. 'as_of' is today, set deliberately because the build container's clock is unreliable.",
+  "_scheme": "v0.x = pre-launch drafts (bump the minor on each substantive change). v1.0 = the version published on 2026-07-02. v1.1+/v2.0 = post-launch amendments. A document's date is the day of its last substantive change; typos/formatting do not bump the version.",
+  "as_of": "2026-07-02",
+  "documents": {
+    "founding-brief": {
+      "title": "We the Users — Founding Brief",
+      "version": "0.13",
+      "updated": "2026-06-22"
+    },
+    "declaration": {
+      "title": "A Declaration of Internet Independence",
+      "version": "0.4",
+      "updated": "2026-06-22"
+    },
+    "it-is-not-the-weather": {
+      "title": "We Never Agreed",
+      "version": "0.4",
+      "updated": "2026-07-02"
+    },
+    "shape-of-digital-shadow": {
+      "title": "Your Digital Shadow",
+      "version": "0.3",
+      "updated": "2026-07-02"
+    },
+    "ambition-against-ambition": {
+      "title": "Ambition Against Ambition",
+      "version": "0.3",
+      "updated": "2026-06-22"
+    },
+    "the-longer-race": {
+      "title": "The Longer Race",
+      "version": "0.4",
+      "updated": "2026-06-22"
+    },
+    "the-ledger-and-the-spoils": {
+      "title": "The Ledger and the Spoils",
+      "version": "0.1",
+      "updated": "2026-06-22"
+    },
+    "economic-foundations": {
+      "title": "Economic Foundations",
+      "version": "0.3",
+      "updated": "2026-06-22"
+    },
+    "framer-invitation": {
+      "title": "Framer Invitation",
+      "version": "0.2",
+      "updated": "2026-06-22"
+    },
+    "packet-start-here": {
+      "title": "Start Here",
+      "version": "0.3",
+      "updated": "2026-06-22"
+    },
+    "cover-note": {
+      "title": "Cover Note",
+      "version": "0.2",
+      "updated": "2026-06-21"
+    },
+    "the-second-zero": {
+      "title": "The Second Zero",
+      "version": "0.1",
+      "updated": "2026-07-02"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+# Python dependencies for the "We the Users" PDF build pipeline.
+# Install:  pip install -r build/pdf/requirements.txt
+#
+# System dependencies (NOT pip-installable) that the pipeline also requires:
+#   - wkhtmltopdf    HTML -> PDF. The common unpatched-Qt build must be run under
+#                    `xvfb-run -a wkhtmltopdf ...` (it needs an X display even headless).
+#   - xvfb           provides the `xvfb-run` wrapper used above.
+#   - poppler-utils  pdftoppm / pdftotext / pdfinfo, used for QA and by check_meta.py.
+#   - Charter font   the document body face (DejaVu Serif is the bundled fallback).
+
+Markdown==3.10.2
+pypdf==5.9.0
+reportlab==4.4.10
