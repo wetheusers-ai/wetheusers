@@ -30,11 +30,6 @@ a whole argument.
 - **Pull requests** — edit any document directly. The smallest useful edit is welcome.
 - **The site** — read everything in one place, and add your name: https://wetheusers.ai
 
-## How these drafts were made
-
-With Claude Code, to get the ideas onto the page fast. Speed was the point — so is the
-humility. None of this is a final product; the final version is the one written together.
-
 ## License
 
 Documents: CC BY-SA 4.0 (`LICENSE-DOCS`). Code: Apache-2.0 (`LICENSE-CODE`). See `NOTICE`.
