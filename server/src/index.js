@@ -151,7 +151,14 @@ async function join(req, env, origin) {
   if (recent && Number(recent.n) >= 25) return json({ ok: false, error: "rate_limited" }, 429, origin);
 
   const now = SISO(Date.now());
-  const existing = await env.DB.prepare(`SELECT key, approved FROM communities WHERE key=?`).bind(key).first();
+  // Resolve by derived key OR exact display name: the picker submits names
+  // (e.g. "The Linux community"), whose slug rarely matches curated seed keys
+  // (e.g. "linux-community"). Without the name match, picker signups silently
+  // create pending duplicates and vanish from the public tallies.
+  const existing = await env.DB.prepare(
+    `SELECT key, approved FROM communities WHERE key=?1 OR lower(name)=lower(?2) LIMIT 1`
+  ).bind(key, community).first();
+  const useKey = existing ? existing.key : key;
   let communityPending;
   if (!existing) {
     await env.DB.prepare(`INSERT INTO communities (key, name, approved, seeded, created_at) VALUES (?,?,0,0,?)`)
@@ -166,7 +173,7 @@ async function join(req, env, origin) {
   await env.DB.prepare(
     `INSERT INTO signups (id, community_key, name, email, email_verified, verify_token, created_at, ip_hash)
      VALUES (?,?,?,?,0,?,?,?)`
-  ).bind(id, key, name, email, vtoken, now, ipHash).run();
+  ).bind(id, useKey, name, email, vtoken, now, ipHash).run();
 
   let emailStatus = "none";
   if (email && vtoken) {
@@ -178,7 +185,7 @@ async function join(req, env, origin) {
     ok: true,
     status: email ? "pending_verification" : "joined",
     emailStatus, communityPending,
-    community: { key, name: community },
+    community: { key: useKey, name: community },
   }, 200, origin);
 }
 
