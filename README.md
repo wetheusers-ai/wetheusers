@@ -18,8 +18,9 @@ a whole argument.
 - `docs/outreach/` — the outreach packet.
 - `references/` — grounding research notes.
 - `source-notes/` — the founder's early typed working notes, preserved as provenance.
-- `server/` — the open backend behind "Join the call" (a Cloudflare Worker with a D1
-  database): schema, seed communities, and worker source. Nothing is run in secret.
+- `server/` — moved to the `website` repo (July 2026): the site and its backend now
+  live together, so the form and the API it calls version as one contract. Still open,
+  still auditable — nothing is run in secret.
 - `deck/` — the launch deck and its build script.
 - `build/pdf/` — the document build pipeline: PDF generation and the version registry.
 - `CHANGELOG.md` / `VERSIONS.md` — the narrative history and current document versions.
