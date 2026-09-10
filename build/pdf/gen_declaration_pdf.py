@@ -1,7 +1,11 @@
 import re, markdown, pathlib
 import sys; sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent)); import docmeta as dm
 
-src = pathlib.Path("/home/claude/wetheusers/docs/declaration/declaration.md").read_text()
+REPO = pathlib.Path(__file__).resolve().parents[2]
+OUT = REPO / "build" / "pdf" / "out"
+OUT.mkdir(parents=True, exist_ok=True)
+
+src = (REPO / "docs/declaration/declaration.md").read_text()
 # Strip the leading header block (title + framing lines, before the first rule);
 # rebuild it as a styled document header. The epigraph + body follow.
 parts = re.split(r'\n-{3,}\n', src, maxsplit=1)
@@ -60,5 +64,5 @@ __BODY__
 </body></html>"""
 
 html = TEMPLATE.replace("__CSS__", CSS).replace("__BODY__", html_body).replace("__META__", dm.meta_html("declaration", publication="July 2, 2026"))
-pathlib.Path("/home/claude/declaration.html").write_text(html)
+(OUT / "declaration.html").write_text(html)
 print("Declaration HTML written:", len(html), "chars")

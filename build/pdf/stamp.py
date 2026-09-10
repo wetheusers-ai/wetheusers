@@ -1,8 +1,13 @@
 import io
+import pathlib
 from pypdf import PdfReader, PdfWriter
 from reportlab.pdfgen import canvas
 
-base = PdfReader("/home/claude/base.pdf")
+REPO = pathlib.Path(__file__).resolve().parents[2]
+OUT = REPO / "build" / "pdf" / "out"
+OUT.mkdir(parents=True, exist_ok=True)
+
+base = PdfReader(str(OUT / "base.pdf"))
 N = len(base.pages)
 writer = PdfWriter()
 for i, page in enumerate(base.pages):

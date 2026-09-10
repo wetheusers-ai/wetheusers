@@ -18,8 +18,9 @@ import sys
 
 HERE = pathlib.Path(__file__).resolve().parent          # .../wetheusers/build/pdf
 ROOT = HERE.parent.parent                                 # .../wetheusers
-OUT = pathlib.Path("/mnt/user-data/outputs")
-HOME = pathlib.Path("/home/claude")
+DIST = pathlib.Path("/mnt/user-data/outputs")              # final rendered PDFs land here
+OUT = ROOT / "build" / "pdf" / "out"                        # intermediate HTML lands here
+OUT.mkdir(parents=True, exist_ok=True)
 sys.path.insert(0, str(HERE))
 import docmeta as dm
 
@@ -75,8 +76,8 @@ STANDARD = [
 
 def render_standard(gen, html, out_pdf, repo_dest, key):
     run(["python", HERE / gen])
-    pdf = OUT / out_pdf
-    run(WK + margins(20, 18, 22) + [HOME / html, pdf])
+    pdf = DIST / out_pdf
+    run(WK + margins(20, 18, 22) + [OUT / html, pdf])
     set_title(pdf, key)
     shutil.copy(pdf, ROOT / repo_dest)
     print(f"  {out_pdf}")
@@ -85,9 +86,9 @@ def render_standard(gen, html, out_pdf, repo_dest, key):
 def render_brief():
     # The brief has a title page + page numbers, applied by stamp.py.
     run(["python", HERE / "gen_pdf.py"])  # writes founding-brief.html
-    run(WK + margins(20, 18, 24) + [HOME / "founding-brief.html", HOME / "base.pdf"])
+    run(WK + margins(20, 18, 24) + [OUT / "founding-brief.html", OUT / "base.pdf"])
     run(["python", HERE / "stamp.py"])    # writes We-the-Users-Founding-Brief.pdf
-    shutil.copy(OUT / "We-the-Users-Founding-Brief.pdf", ROOT / "docs/founding-brief.pdf")
+    shutil.copy(DIST / "We-the-Users-Founding-Brief.pdf", ROOT / "docs/founding-brief.pdf")
     print("  We-the-Users-Founding-Brief.pdf (title page + page numbers)")
 
 
@@ -97,8 +98,8 @@ def render_outreach():
         ("starthere.html", "We-the-Users-Start-Here.pdf", "docs/outreach/packet-start-here.pdf", "packet-start-here"),
         ("covernote.html", "We-the-Users-Cover-Note.pdf", "docs/outreach/cover-note.pdf", "cover-note"),
     ]:
-        pdf = OUT / out_pdf
-        run(WK + margins(20, 18, 22) + [HOME / html, pdf])
+        pdf = DIST / out_pdf
+        run(WK + margins(20, 18, 22) + [OUT / html, pdf])
         set_title(pdf, key)
         shutil.copy(pdf, ROOT / repo_dest)
         print(f"  {out_pdf}")

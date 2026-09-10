@@ -9,7 +9,7 @@ orientation, the invitation, the Declaration, the four essays, then the full bri
 import pathlib
 import zipfile
 
-ROOT = pathlib.Path("/home/claude/wetheusers")
+ROOT = pathlib.Path(__file__).resolve().parents[2]
 OUT = pathlib.Path("/mnt/user-data/outputs/We-the-Users-Framer-Packet.zip")
 
 # (name inside the packet, source PDF in the repo) — order is the reading order.

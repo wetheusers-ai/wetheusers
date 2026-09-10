@@ -1,7 +1,11 @@
 import re, markdown, pathlib
 import sys; sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent)); import docmeta as dm
 
-src = pathlib.Path("/home/claude/wetheusers/references/economic-foundations-collaboration.md").read_text()
+REPO = pathlib.Path(__file__).resolve().parents[2]
+OUT = REPO / "build" / "pdf" / "out"
+OUT.mkdir(parents=True, exist_ok=True)
+
+src = (REPO / "references/economic-foundations-collaboration.md").read_text()
 # strip only the H1 title line (shown in the header); keep the caveat + body
 lines = src.split("\n")
 body_md = "\n".join(lines[1:]).lstrip("\n")
@@ -66,5 +70,5 @@ __BODY__
 </body></html>"""
 
 html = TEMPLATE.replace("__CSS__", CSS).replace("__BODY__", html_body).replace("__META__", dm.meta_html("economic-foundations", label="Working note"))
-pathlib.Path("/home/claude/econref.html").write_text(html)
+(OUT / "econref.html").write_text(html)
 print("HTML written:", len(html), "chars")

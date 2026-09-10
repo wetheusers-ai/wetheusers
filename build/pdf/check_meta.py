@@ -12,7 +12,7 @@ import pathlib
 import subprocess
 import sys
 
-ROOT = pathlib.Path("/home/claude/wetheusers")
+ROOT = pathlib.Path(__file__).resolve().parents[2]
 OUT = pathlib.Path("/mnt/user-data/outputs")
 DATA = json.loads((ROOT / "build/pdf/versions.json").read_text())
 

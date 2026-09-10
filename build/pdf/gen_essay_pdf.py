@@ -1,7 +1,11 @@
 import re, markdown, pathlib
 import sys; sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent)); import docmeta as dm
 
-src = pathlib.Path("/home/claude/wetheusers/docs/essay/it-is-not-the-weather.md").read_text()
+REPO = pathlib.Path(__file__).resolve().parents[2]
+OUT = REPO / "build" / "pdf" / "out"
+OUT.mkdir(parents=True, exist_ok=True)
+
+src = (REPO / "docs/essay/it-is-not-the-weather.md").read_text()
 parts = re.split(r'\n-{3,}\n', src, maxsplit=1)
 body_md = parts[1] if len(parts) > 1 else src
 
@@ -66,5 +70,5 @@ __BODY__
 </body></html>"""
 
 html = TEMPLATE.replace("__CSS__", CSS).replace("__BODY__", html_body).replace("__META__", dm.meta_html("it-is-not-the-weather"))
-pathlib.Path("/home/claude/essay.html").write_text(html)
+(OUT / "essay.html").write_text(html)
 print("Essay HTML written:", len(html), "chars")

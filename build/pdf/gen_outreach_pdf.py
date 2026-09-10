@@ -1,6 +1,10 @@
 import re, markdown, pathlib
 import sys; sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent)); import docmeta as dm
 
+REPO = pathlib.Path(__file__).resolve().parents[2]
+OUT = REPO / "build" / "pdf" / "out"
+OUT.mkdir(parents=True, exist_ok=True)
+
 CSS = """
 * { box-sizing: border-box; }
 html { -webkit-print-color-adjust: exact; }
@@ -87,9 +91,9 @@ def render(src_path, title, subtitle, out_html, key, second_ol_start=None, first
     print("HTML written:", out_html, len(html), "chars")
 
 
-render("/home/claude/wetheusers/docs/outreach/packet-start-here.md",
-       "Start here", "", "/home/claude/starthere.html", "packet-start-here", second_ol_start=4)
+render(REPO / "docs/outreach/packet-start-here.md",
+       "Start here", "", OUT / "starthere.html", "packet-start-here", second_ol_start=4)
 
-render("/home/claude/wetheusers/docs/outreach/cover-note.md",
+render(REPO / "docs/outreach/cover-note.md",
        "Cover note", "Email template &mdash; personalize before sending",
-       "/home/claude/covernote.html", "cover-note", first_para_aside=True)
+       OUT / "covernote.html", "cover-note", first_para_aside=True)
